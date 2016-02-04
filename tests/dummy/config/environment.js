@@ -16,7 +16,13 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    analytics: {
+      integrations: [
+        // Here you can configure analytics integrations.
+      ]
+    },
   };
 
   if (environment === 'development') {
