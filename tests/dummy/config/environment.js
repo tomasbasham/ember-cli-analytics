@@ -20,7 +20,46 @@ module.exports = function(environment) {
 
     analytics: {
       integrations: [
-        // Here you can configure analytics integrations.
+        {
+          name: 'Bing',
+          config: {
+            id: 'XXXXXXX'
+          }
+        },
+        {
+          name: 'Facebook',
+          config: {
+            id: 'XXXXXXXXXXXXXXXX'
+          }
+        },
+        {
+          name: 'GoogleAdwords',
+          config: {
+            id: 'XXXXXXXXXX',
+            label: 'XXXXXXXXXXXXXXXXXXX'
+          }
+        },
+        {
+          name: 'GoogleAnalytics',
+          config: {
+            id: 'UA-XXXXXXXX-Y',
+            remarketing: true,
+            ecommerce: true,
+            enhancedEcommerce: false
+          }
+        },
+        {
+          name: 'Mixpanel',
+          config: {
+            token: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+          }
+        },
+        {
+          name: 'Optimizely',
+          config: {
+            id: 'XXXXXXXXXX'
+          }
+        }
       ]
     },
   };
