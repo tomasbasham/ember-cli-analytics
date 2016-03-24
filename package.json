@@ -1,12 +1,7 @@
 {
   "name": "ember-cli-analytics",
-<<<<<<< Updated upstream
-  "version": "0.0.0",
-  "description": "An ember-cli addon to interface with analytics service and external integrations.",
-=======
   "version": "0.0.1",
   "description": "An ember-cli addon to interface with analytics services and external integrations.",
->>>>>>> Stashed changes
   "directories": {
     "doc": "doc",
     "test": "tests"
