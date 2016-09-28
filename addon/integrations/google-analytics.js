@@ -59,8 +59,13 @@ export default Base.extend({
     }
 
     for (let key in options) {
-      const capitalizedKey = capitalize(key);
-      gaEvent[`event${capitalizedKey}`] = options[key];
+      const value = options[key];
+
+      // If not a dimension or metric, prepend with 'event'
+      let shouldPrefix = !/^(dimension|metric)[0-9]{1,2}/.test(key);
+      if (shouldPrefix) key = `event${capitalize(key)}`;
+
+      gaEvent[key] = value;
     }
 
     const event = merge(sendEvent, gaEvent);
