@@ -61,7 +61,7 @@ export default Base.extend({
     for (let key in options) {
       const value = options[key];
 
-      // If not a dimension or metric, prepend with 'event'
+      // If key is not a 'dimension' or 'metric', prepend with 'event'
       let shouldPrefix = !/^(dimension|metric)[0-9]{1,2}/.test(key);
       if (shouldPrefix) key = `event${capitalize(key)}`;
 
