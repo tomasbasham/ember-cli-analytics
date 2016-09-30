@@ -62,8 +62,10 @@ export default Base.extend({
       const value = options[key];
 
       // If key is not a 'dimension' or 'metric', prepend with 'event'
-      let shouldPrefix = !/^(dimension|metric)[0-9]{1,2}/.test(key);
-      if (shouldPrefix) key = `event${capitalize(key)}`;
+      const shouldPrefix = !/^(dimension|metric)[0-9]{1,2}/.test(key);
+      if (shouldPrefix) {
+        key = `event${capitalize(key)}`;
+      }
 
       gaEvent[key] = value;
     }
