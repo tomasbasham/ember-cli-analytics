@@ -49,6 +49,24 @@ test('#trackEvent calls ga with the correct arguments', function(assert) {
   }));
 });
 
+test('#trackEvent handles metrics and dimensions correctly', function(assert) {
+  let integration = this.subject({ config });
+
+  const stub = sandbox.stub(window, 'ga', function() {
+    return true;
+  });
+
+  integration.trackEvent({ category: 'Starships', action: 'Warp', dimension1: 'Enterprise', metric1: 'D' });
+
+  assert.ok(stub.calledWith('send', {
+    hitType: 'event',
+    eventCategory: 'Starships',
+    eventAction: 'Warp',
+    dimension1: 'Enterprise',
+    metric1: 'D'
+  }));
+});
+
 test('#identify calls ga with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
