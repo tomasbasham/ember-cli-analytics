@@ -1,0 +1,24 @@
+version: '2'
+services:
+  node: &defaults
+    image: tomasbasham/node:5.11.1
+    volumes:
+      - .:/usr/src/app
+
+  npm:
+    <<: *defaults
+    entrypoint: ['/usr/local/bin/npm']
+
+  bower:
+    <<: *defaults
+    entrypoint: ['/usr/local/bin/bower', '--allow-root']
+
+  travis:
+    image: tomasbasham/travis:1.8.2
+    volumes:
+      - travis-data:/root/.travis
+      - .:/usr/src/app
+
+volumes:
+  travis-data:
+    external: true
