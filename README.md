@@ -6,7 +6,7 @@ Being able to track what your users are doing provides valuable insights into ho
 
 This addon provides a simple `analytics` service allowing your applications to support multiple analytics integrations without having to clutter your code base with tracking codes. This addon bundles a series of adapters requiring that you only have to manage a single API.
 
-This addon is built upon the [ember-cli-adpater-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern) allowing you to easily create your own analytics integration adapters.
+This addon is built upon the [ember-cli-adapter-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern) allowing you to easily create your own analytics integration adapters.
 
 ## Installation
 
@@ -83,7 +83,7 @@ This configures your application to use all 6 adapters bundled with this addon.
 
 #### Integrations
 
-The integrations array takes a series of objects defining the configuration of each adapter. This is a requirement of [ember-cli-adpater-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern) where each object may take an additional series of key/value pairs. Alongside the name of each adapter, in pascal case, this addon also requires a configuration object typically defining the `id` or `token` required to authenticate with the external service.
+The integrations array takes a series of objects defining the configuration of each adapter. This is a requirement of [ember-cli-adapter-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern) where each object may take an additional series of key/value pairs. Alongside the name of each adapter, in pascal case, this addon also requires a configuration object typically defining the `id` or `token` required to authenticate with the external service.
 
 ### Injection
 
@@ -149,7 +149,7 @@ export default Ember.Controller.extend({
 });
 ```
 
-This is great behaviour if you have setup multiple analytics integrations in `config/environment` and is a consequence of the [ember-cli-adpater-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern). However if you only want to send events to a single analytics integration you must specify its name.
+This is great behaviour if you have setup multiple analytics integrations in `config/environment` and is a consequence of the [ember-cli-adapter-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern). However if you only want to send events to a single analytics integration you must specify its name.
 
 ##### <a name="single-adapter-example"></a>Example:
 
