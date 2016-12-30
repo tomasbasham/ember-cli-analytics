@@ -23,7 +23,7 @@ test('#trackPage is called on didTransition', function(assert) {
   let TrackableObject = Ember.Object.extend(TrackableMixin);
   let subject = TrackableObject.create();
 
-  const analytics = { trackPage: Ember.K };
+  const analytics = { trackPage() {} };
   const spy = sandbox.spy(analytics, 'trackPage');
 
   set(subject, 'analytics', analytics);

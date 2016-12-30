@@ -8,7 +8,7 @@ export default Ember.Object.extend({
    *
    * @method trackPage
    */
-  trackPage: Ember.K,
+  trackPage() {},
 
   /*
    * Send an arbitrary event to the
@@ -16,7 +16,7 @@ export default Ember.Object.extend({
    *
    * @method trackEvent
    */
-  trackEvent: Ember.K,
+  trackEvent() {},
 
   /*
    * Send a conversion completion
@@ -24,7 +24,7 @@ export default Ember.Object.extend({
    *
    * @method trackConversion
    */
-  trackConversion: Ember.K,
+  trackConversion() {},
 
   /*
    * Identify an anonymous user with a
@@ -37,7 +37,7 @@ export default Ember.Object.extend({
    *
    * @method identity
    */
-  identify: Ember.K,
+  identify() {},
 
   /*
    * For those platforms that support
@@ -49,5 +49,5 @@ export default Ember.Object.extend({
    *
    * @method alias
    */
-  alias: Ember.K
+  alias() {}
 });
