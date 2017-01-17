@@ -111,8 +111,8 @@ export default Base.extend({
    */
   insertTag: on('init', function() {
     const config = copy(get(this, 'config'));
-    const { id, remarketing, ecommerce, enhancedEcommerce } = config;
-    const properties = without(config, 'id', 'remarketing', 'ecommerce', 'enhancedEcommerce');
+    const { id, remarketing, ecommerce, enhancedEcommerce, set } = config;
+    const properties = without(config, 'id', 'remarketing', 'ecommerce', 'enhancedEcommerce', 'set');
 
     assert('You must pass a valid `id` to the GoogleAnaltics adapter', id);
 
@@ -140,6 +140,11 @@ export default Base.extend({
 
       if (enhancedEcommerce) {
         window.ga('require', 'ecommerce');
+      }
+      if (set) {
+        for ( const attr of Object.keys(set) ) {
+          window.ga('set', attr, set[attr]);
+        }
       }
     }
   }),
