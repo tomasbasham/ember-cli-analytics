@@ -56,7 +56,10 @@ module.exports = function(environment) {
             id: 'UA-XXXXXXXX-Y',
             remarketing: true,
             ecommerce: true,
-            enhancedEcommerce: false
+            enhancedEcommerce: false,
+            set: {
+              anonymizeIp: true
+            }
           }
         },
         {
