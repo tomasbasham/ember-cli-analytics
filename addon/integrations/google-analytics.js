@@ -141,8 +141,9 @@ export default Base.extend({
       if (enhancedEcommerce) {
         window.ga('require', 'ecommerce');
       }
+
       if (set) {
-        for ( const attr of Object.keys(set) ) {
+        for (const attr of Object.keys(set)) {
           window.ga('set', attr, set[attr]);
         }
       }
