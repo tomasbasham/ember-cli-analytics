@@ -46,7 +46,12 @@ export default Base.extend({
     }
 
     if (canUseDOM) {
-      window['google_trackConversion'](googleAdwordsEvent);
+      try {
+        window['google_trackConversion'](googleAdwordsEvent);
+      }
+      catch (err) {
+        Ember.debug(err);
+      }
     }
   },
 
