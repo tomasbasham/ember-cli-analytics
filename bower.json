@@ -1,6 +1,0 @@
-{
-  "name": "ember-cli-analytics",
-  "dependencies": {
-    "sinonjs": "^1.17.1"
-  }
-}
