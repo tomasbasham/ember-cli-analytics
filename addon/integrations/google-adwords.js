@@ -60,12 +60,12 @@ export default Base.extend({
    */
   insertTag: on('init', function() {
     if (canUseDOM) {
-      /* jshint ignore:start */
+      /* eslint-disable */
       (function(i,s,o,g,r,a,m){
         i[r]=i[r]||function(){(i['r'].q=i['r'].q||[]).push(arguments)}
         a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=0;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.googleadservices.com/pagead/conversion_async.js','google_trackConversion');
-      /* jshint ignore:end */
+      /* eslint-enable */
     }
   }),
 

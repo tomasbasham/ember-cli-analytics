@@ -1,4 +1,5 @@
-/*jshint node:true*/
+/* eslint-env node */
+
 module.exports = {
   description: 'Generate an integration adapter unit test.',
 

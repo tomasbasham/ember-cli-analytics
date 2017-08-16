@@ -1,6 +1,6 @@
 # Ember-cli-analytics [![Build Status](https://travis-ci.org/tomasbasham/ember-cli-analytics.svg?branch=master)](https://travis-ci.org/tomasbasham/ember-cli-analytics)
 
-An [Ember CLI](http://www.ember-cli.com/) addon to interface with analytics services and external integrations.
+An [Ember CLI](https://ember-cli.com/) addon to interface with analytics services and external integrations.
 
 Being able to track what your users are doing provides valuable insights into how your application is performing. However if you are trying to support multiple analytics integrations it can quickly become unmanageable.
 
@@ -200,18 +200,18 @@ export default Router;
 
 ### Installation
 
-* `git clone` this repository
+* `git clone <repository-url>` this repository
+* `cd ember-cli-analytics`
 * `npm install`
-* `bower install`
 
 ### Running
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+* `ember serve`
+* Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ### Running Tests
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
+* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
@@ -219,4 +219,4 @@ export default Router;
 
 * `ember build`
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
