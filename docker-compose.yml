@@ -1,20 +1,20 @@
-version: '2'
+version: "3"
 services:
   node: &defaults
-    image: tomasbasham/node:5.11.1
+    image: tomasbasham/node:6.11.0
     volumes:
       - .:/usr/src/app
 
   npm:
     <<: *defaults
-    entrypoint: ['/usr/local/bin/npm']
+    entrypoint: ["/usr/local/bin/npm"]
 
   bower:
     <<: *defaults
-    entrypoint: ['/usr/local/bin/bower', '--allow-root']
+    entrypoint: ["/usr/local/bin/bower", "--allow-root"]
 
   travis:
-    image: tomasbasham/travis:1.8.2
+    image: tomasbasham/travis:1.8.8
     volumes:
       - travis-data:/root/.travis
       - .:/usr/src/app
