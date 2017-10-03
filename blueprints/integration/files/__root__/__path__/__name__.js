@@ -16,7 +16,7 @@ export default Base.extend({
    * @param {Object} options
    *   Options to send the analytics engine.
    */
-  trackPage(options = {}) {
+  trackPage(/*options = {}*/) {
 
   },
 
@@ -29,7 +29,7 @@ export default Base.extend({
    * @param {Object} options
    *   Options to send the analytics engine.
    */
-  trackEvent(options = {}) {
+  trackEvent(/*options = {}*/) {
 
   },
 
@@ -42,7 +42,7 @@ export default Base.extend({
    * @param {Object} options
    *   Options to send the analytics engine.
    */
-  trackConversion(options = {}) {
+  trackConversion(/*options = {}*/) {
 
   },
 
@@ -60,7 +60,7 @@ export default Base.extend({
    * @param {Object} options
    *   Options to send the analytics engine.
    */
-  identify(options = {}) {
+  identify(/*options = {}*/) {
 
   },
 
@@ -77,7 +77,7 @@ export default Base.extend({
    * @param {Object} options
    *   Options to send the analytics engine.
    */
-  alias(options = {}) {
+  alias(/*options = {}*/) {
 
   },
 
