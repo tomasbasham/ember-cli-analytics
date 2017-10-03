@@ -1,7 +1,3 @@
 engines:
   duplication:
-    enabled: true
-    config:
-      languages:
-        javascript:
-          mass_threshold: 44
+    enabled: false
