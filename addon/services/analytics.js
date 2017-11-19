@@ -1,10 +1,10 @@
 import Ember from 'ember';
 import Adaptable from 'ember-cli-adapter-pattern/mixins/adaptable';
 import proxyToAdapter from 'ember-cli-adapter-pattern/utils/proxy-to-adapter';
-import getOwner from 'ember-getowner-polyfill';
 
 const {
   assert,
+  getOwner,
   getWithDefault,
   on,
   set
