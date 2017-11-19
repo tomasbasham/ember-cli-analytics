@@ -1,12 +1,20 @@
 # Ember-cli-analytics [![Build Status](https://travis-ci.org/tomasbasham/ember-cli-analytics.svg?branch=master)](https://travis-ci.org/tomasbasham/ember-cli-analytics)
 
-An [Ember CLI](https://ember-cli.com/) addon to interface with analytics services and external integrations.
+An [Ember CLI](https://ember-cli.com/) addon to interface with analytics
+services and external integrations.
 
-Being able to track what your users are doing provides valuable insights into how your application is performing. However if you are trying to support multiple analytics integrations it can quickly become unmanageable.
+Being able to track what your users are doing provides valuable insights into
+how your application is performing. However if you are trying to support
+multiple analytics integrations it can quickly become unmanageable.
 
-This addon provides a simple `analytics` service allowing your applications to support multiple analytics integrations without having to clutter your code base with tracking codes. This addon bundles a series of adapters requiring that you only have to manage a single API.
+This addon provides a simple `analytics` service allowing your applications to
+support multiple analytics integrations without having to clutter your code
+base with tracking codes. This addon bundles a series of adapters requiring
+that you only have to manage a single API.
 
-This addon is built upon the [ember-cli-adapter-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern) allowing you to easily create your own analytics integration adapters.
+This addon is built upon the
+[ember-cli-adapter-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern)
+allowing you to easily create your own analytics integration adapters.
 
 ## Installation
 
@@ -17,13 +25,17 @@ ember install ember-cli-analytics
 
 ## Usage
 
-This addon implements a service to interface with several analytics integration by providing an abstract API that hides the implementation details of each analytics integration adapter.
+This addon implements a service to interface with several analytics integration
+by providing an abstract API that hides the implementation details of each
+analytics integration adapter.
 
 ### Configuration
 
-Before the `analytics` service can be used it first must be configured through `config/environment`. This allows you to define which of the integrations you want to make available to your application through the `analytics` service.
+Before the `analytics` service can be used it first must be configured through
+`config/environment`. This allows you to define which of the integrations you
+want to make available to your application through the `analytics` service.
 
-##### <a name="configuration-example"></a>Example:
+##### Configuration Example
 
 ```JavaScript
 // config/environment.js
@@ -86,13 +98,21 @@ This configures your application to use all 6 adapters bundled with this addon.
 
 #### Integrations
 
-The integrations array takes a series of objects defining the configuration of each adapter. This is a requirement of [ember-cli-adapter-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern) where each object may take an additional series of key/value pairs. Alongside the name of each adapter, in pascal case, this addon also requires a configuration object typically defining the `id` or `token` required to authenticate with the external service.
+The integrations array takes a series of objects defining the configuration of
+each adapter. This is a requirement of
+[ember-cli-adapter-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern)
+where each object may take an additional series of key/value pairs. Alongside
+the name of each adapter, in pascal case, this addon also requires a
+configuration object typically defining the `id` or `token` required to
+authenticate with the external service.
 
 ### Injection
 
-This addon makes no assumptions about what ember objects you want to make the `analytics` service available. Therefore in order to make the service available you need to implement you own injections.
+This addon makes no assumptions about what ember objects you want to make the
+`analytics` service available. Therefore in order to make the service available
+you need to implement you own injections.
 
-##### <a name="injection-initializer-example"></a>Example:
+##### Injection Initializer Example
 
 ```JavaScript
 // app/initializers/analytics.js
@@ -107,9 +127,12 @@ export default {
 };
 ```
 
-This will make the `analytics` service available to all controllers and routes. It is however unlikely that you will require the service to be injected into every controller or route of your applications. Therefore it is recommended that you include the service on a per object basis.
+This will make the `analytics` service available to all controllers and routes.
+It is however unlikely that you will require the service to be injected into
+every controller or route of your applications. Therefore it is recommended
+that you include the service on a per object basis.
 
-##### <a name="injection-controller-example"></a>Example:
+##### Injection Controller Example
 
 ```JavaScript
 // app/controllers/application.js
@@ -120,11 +143,14 @@ export default Ember.Controller.extend({
 });
 ```
 
-This will create a dependency on the application controller and inject the `analytics` service into this controller only. This can be repeated across all objects that need access to the service.
+This will create a dependency on the application controller and inject the
+`analytics` service into this controller only. This can be repeated across all
+objects that need access to the service.
 
 ### Analytics Service
 
-The `analytics` service implements an abstract API that currently supports the following methods:
+The `analytics` service implements an abstract API that currently supports the
+following methods:
 
 * trackPage
 * trackEvent
@@ -132,9 +158,12 @@ The `analytics` service implements an abstract API that currently supports the f
 * identify
 * alias
 
-When using this API, by default the service will call the corresponding method on each of the adapters unless a specific adapter is specified. This means that if you were to call `trackEvent` on the service, it would in turn call `trackEvent` on each of the adapters that implement it.
+When using this API, by default the service will call the corresponding method
+on each of the adapters unless a specific adapter is specified. This means that
+if you were to call `trackEvent` on the service, it would in turn call
+`trackEvent` on each of the adapters that implement it.
 
-##### <a name="all-adapters-example"></a>Example:
+##### All Adapters Example
 
 ```JavaScript
 // app/controllers/application.js
@@ -152,9 +181,13 @@ export default Ember.Controller.extend({
 });
 ```
 
-This is great behaviour if you have setup multiple analytics integrations in `config/environment` and is a consequence of the [ember-cli-adapter-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern). However if you only want to send events to a single analytics integration you must specify its name.
+This is great behaviour if you have setup multiple analytics integrations in
+`config/environment` and is a consequence of the
+[ember-cli-adapter-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern).
+However if you only want to send events to a single analytics integration you
+must specify its name.
 
-##### <a name="single-adapter-example"></a>Example:
+##### Single Adapter Example
 
 ```JavaScript
 // app/controllers/application.js
@@ -176,9 +209,11 @@ This will only send the event to the `Mixpanel` adapter.
 
 ### Trackable Mixin
 
-To track page views this addon provides a `trackable` mixin. This mixin should be used to augment the ember router and will invoke the `trackPage` method on each of the configured adapters.
+To track page views this addon provides a `trackable` mixin. This mixin should
+be used to augment the ember router and will invoke the `trackPage` method on
+each of the configured adapters.
 
-##### <a name="trackable-example"></a>Example:
+##### Trackable Example
 
 ```JavaScript
 // app/router.js
@@ -211,7 +246,8 @@ export default Router;
 
 ### Running Tests
 
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
+* `npm test` (Runs `ember try:each` to test your addon against multiple Ember
+  versions)
 * `ember test`
 * `ember test --server`
 
@@ -219,4 +255,5 @@ export default Router;
 
 * `ember build`
 
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+For more information on using ember-cli, visit
+[https://ember-cli.com/](https://ember-cli.com/).
