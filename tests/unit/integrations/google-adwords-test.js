@@ -25,7 +25,7 @@ test('it can be configured with an id', function(assert) {
 test('#trackConversion calls google_trackConversion with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window, 'google_trackConversion', function() {
+  const stub = sandbox.stub(window, 'google_trackConversion').callsFake(function() {
     return true;
   });
 

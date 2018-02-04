@@ -24,7 +24,7 @@ test('it can be configured with an id', function(assert) {
 test('#trackPage calls ga with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window, 'ga', function() {
+  const stub = sandbox.stub(window, 'ga').callsFake(function() {
     return true;
   });
 
@@ -35,7 +35,7 @@ test('#trackPage calls ga with the correct arguments', function(assert) {
 test('#trackEvent calls ga with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window, 'ga', function() {
+  const stub = sandbox.stub(window, 'ga').callsFake(function() {
     return true;
   });
 
@@ -52,7 +52,7 @@ test('#trackEvent calls ga with the correct arguments', function(assert) {
 test('#trackEvent handles metrics and dimensions correctly', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window, 'ga', function() {
+  const stub = sandbox.stub(window, 'ga').callsFake(function() {
     return true;
   });
 
@@ -70,7 +70,7 @@ test('#trackEvent handles metrics and dimensions correctly', function(assert) {
 test('#identify calls ga with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window, 'ga', function() {
+  const stub = sandbox.stub(window, 'ga').callsFake(function() {
     return true;
   });
 

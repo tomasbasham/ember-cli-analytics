@@ -24,7 +24,7 @@ test('it can be configured with a token', function(assert) {
 test('#trackPage calls mixpanel with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window.mixpanel, 'track', function() {
+  const stub = sandbox.stub(window.mixpanel, 'track').callsFake(function() {
     return true;
   });
 
@@ -35,7 +35,7 @@ test('#trackPage calls mixpanel with the correct arguments', function(assert) {
 test('#trackEvent calls mixpanel with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window.mixpanel, 'track', function() {
+  const stub = sandbox.stub(window.mixpanel, 'track').callsFake(function() {
     return true;
   });
 
@@ -46,7 +46,7 @@ test('#trackEvent calls mixpanel with the correct arguments', function(assert) {
 test('#trackConversion calls mixpanel with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window.mixpanel.people, 'track_charge', function() {
+  const stub = sandbox.stub(window.mixpanel.people, 'track_charge').callsFake(function() {
     return true;
   });
 
@@ -57,7 +57,7 @@ test('#trackConversion calls mixpanel with the correct arguments', function(asse
 test('#identify calls mixpanel with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window.mixpanel, 'identify', function() {
+  const stub = sandbox.stub(window.mixpanel, 'identify').callsFake(function() {
     return true;
   });
 
@@ -68,7 +68,7 @@ test('#identify calls mixpanel with the correct arguments', function(assert) {
 test('#alias calls mixpanel with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window.mixpanel, 'alias', function() {
+  const stub = sandbox.stub(window.mixpanel, 'alias').callsFake(function() {
     return true;
   });
 

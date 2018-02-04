@@ -24,7 +24,7 @@ test('it can be configured with an id', function(assert) {
 test('#trackPage calls optimizely with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window.optimizely, 'push', function() {
+  const stub = sandbox.stub(window.optimizely, 'push').callsFake(function() {
     return true;
   });
 
@@ -38,7 +38,7 @@ test('#trackPage calls optimizely with the correct arguments', function(assert) 
 test('#trackEvent calls optimizely with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window.optimizely, 'push', function() {
+  const stub = sandbox.stub(window.optimizely, 'push').callsFake(function() {
     return true;
   });
 

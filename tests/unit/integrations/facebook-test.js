@@ -24,7 +24,7 @@ test('it can be configured with an id', function(assert) {
 test('#trackEvent calls fbq with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window, 'fbq', function() {
+  const stub = sandbox.stub(window, 'fbq').callsFake(function() {
     return true;
   });
 
@@ -35,7 +35,7 @@ test('#trackEvent calls fbq with the correct arguments', function(assert) {
 test('#trackConversion calls fbq with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window, 'fbq', function() {
+  const stub = sandbox.stub(window, 'fbq').callsFake(function() {
     return true;
   });
 

@@ -24,7 +24,7 @@ test('it can be configured with an id', function(assert) {
 test('#trackPage calls uetq with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window.uetq, 'push', function() {
+  const stub = sandbox.stub(window.uetq, 'push').callsFake(function() {
     return true;
   });
 
@@ -35,7 +35,7 @@ test('#trackPage calls uetq with the correct arguments', function(assert) {
 test('#trackConversion calls uetq with the correct arguments', function(assert) {
   let integration = this.subject({ config });
 
-  const stub = sandbox.stub(window.uetq, 'push', function() {
+  const stub = sandbox.stub(window.uetq, 'push').callsFake(function() {
     return true;
   });
 
