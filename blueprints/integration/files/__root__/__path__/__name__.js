@@ -1,9 +1,5 @@
-import Ember from 'ember';
 import Base from 'ember-cli-analytics/integrations/base';
-
-const {
-  on
-} = Ember;
+import { on } from '@ember/object/evented';
 
 export default Base.extend({
 

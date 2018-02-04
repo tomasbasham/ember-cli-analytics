@@ -1,4 +1,4 @@
-import canUseDom from '../../../utils/can-use-dom';
+import canUseDom from 'dummy/utils/can-use-dom';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | can use dom');

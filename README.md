@@ -1,4 +1,4 @@
-# Ember-cli-analytics [![Build Status](https://travis-ci.org/tomasbasham/ember-cli-analytics.svg?branch=master)](https://travis-ci.org/tomasbasham/ember-cli-analytics)
+# ember-cli-analytics [![Build Status](https://travis-ci.org/tomasbasham/ember-cli-analytics.svg?branch=master)](https://travis-ci.org/tomasbasham/ember-cli-analytics)
 
 An [Ember CLI](https://ember-cli.com/) addon to interface with analytics
 services and external integrations.
@@ -40,7 +40,7 @@ want to make available to your application through the `analytics` service.
 ```JavaScript
 // config/environment.js
 module.exports = function(environment) {
-  var ENV = {
+  let ENV = {
     analytics: {
       integrations: [
         {
@@ -121,10 +121,7 @@ export function initialize(application) {
   application.inject('route', 'analytics', 'service:analytics');
 };
 
-export default {
-  name: 'analytics',
-  initialize: initialize
-};
+export default { initialize };
 ```
 
 This will make the `analytics` service available to all controllers and routes.
@@ -136,10 +133,11 @@ that you include the service on a per object basis.
 
 ```JavaScript
 // app/controllers/application.js
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { inject } from '@ember/service';
 
-export default Ember.Controller.extend({
-  analytics: Ember.inject.service()
+export default Controller.extend({
+  analytics: inject()
 });
 ```
 
@@ -152,11 +150,11 @@ objects that need access to the service.
 The `analytics` service implements an abstract API that currently supports the
 following methods:
 
-* trackPage
-* trackEvent
-* trackConversion
-* identify
-* alias
+* `trackPage`
+* `trackEvent`
+* `trackConversion`
+* `identify`
+* `alias`
 
 When using this API, by default the service will call the corresponding method
 on each of the adapters unless a specific adapter is specified. This means that
@@ -167,14 +165,17 @@ if you were to call `trackEvent` on the service, it would in turn call
 
 ```JavaScript
 // app/controllers/application.js
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
-  analytics: Ember.inject.service(),
+import { get } from '@ember/object';
+import { inject } from '@ember/service';
+
+export default Controller.extend({
+  analytics: inject(),
 
   actions: {
     playVideo() {
-      const analytics = this.get('analytics');
+      const analytics = get(this, 'analytics');
       analytics.trackEvent({ action: 'videoPlayed' });
     }
   }
@@ -191,14 +192,17 @@ must specify its name.
 
 ```JavaScript
 // app/controllers/application.js
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
-  analytics: Ember.inject.service(),
+import { get } from '@ember/object';
+import { inject } from '@ember/service';
+
+export default Controller.extend({
+  analytics: inject(),
 
   actions: {
     playVideo() {
-      const analytics = this.get('analytics');
+      const analytics = get(this, 'analytics');
       analytics.trackEvent('Mixpanel', { action: 'videoPlayed' });
     }
   }
@@ -217,16 +221,18 @@ each of the configured adapters.
 
 ```JavaScript
 // app/router.js
-import Ember from 'ember';
+import EmberRouter from '@ember/routing/router';
 import Trackable from 'ember-cli-analytics/mixins/trackable';
-import config from 'whichledlight/config/environment';
+import config from './config/environment';
 
-const Router = Ember.Router.extend(Trackable, {
-  location: config.locationType
+const Router = EmberRouter.extend(Trackable, {
+  location: config.locationType,
+  rootURL: config.rootURL
 });
 
 Router.map(function() {
-};
+  this.route('index');
+});
 
 export default Router;
 ```

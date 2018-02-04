@@ -1,20 +1,18 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 
-const {
-  assert,
-  get,
-  inject,
-  on
-} = Ember;
+import { assert } from '@ember/debug';
+import { get } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { inject } from '@ember/service';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   /*
    * Inject the analytics service
    * so we may make use of multiple
    * analytics integrations.
    */
-  analytics: inject.service(),
+  analytics: inject(),
 
   /*
    * Push the page transition to all

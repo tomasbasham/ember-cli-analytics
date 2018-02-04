@@ -1,11 +1,10 @@
-import Ember from 'ember';
-import TrackableMixin from '../../../mixins/trackable';
-import { module, test } from 'qunit';
+import EmberObject from '@ember/object';
 import Sinon from 'sinon';
 
-const {
-  set
-} = Ember;
+import TrackableMixin from 'ember-cli-analytics/mixins/trackable';
+
+import { set } from '@ember/object';
+import { module, test } from 'qunit';
 
 let sandbox;
 
@@ -20,7 +19,7 @@ module('Unit | Mixin | trackable', {
 });
 
 test('#trackPage is called on didTransition', function(assert) {
-  let TrackableObject = Ember.Object.extend(TrackableMixin);
+  let TrackableObject = EmberObject.extend(TrackableMixin);
   let subject = TrackableObject.create();
 
   const analytics = { trackPage() {} };

@@ -1,16 +1,15 @@
-import Ember from 'ember';
+import $ from 'jquery';
+
 import Base from 'ember-cli-analytics/integrations/base';
 import canUseDOM from 'ember-cli-analytics/utils/can-use-dom';
 import without from 'ember-cli-analytics/utils/without';
 
-const {
-  assert,
-  copy,
-  get,
-  isPresent,
-  merge,
-  on
-} = Ember;
+import { assert } from '@ember/debug';
+import { get } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { copy } from '@ember/object/internals';
+import { merge } from '@ember/polyfills';
+import { isPresent } from '@ember/utils';
 
 export default Base.extend({
 
@@ -79,7 +78,7 @@ export default Base.extend({
    */
   removeTag: on('willDestroy', function() {
     if (canUseDOM) {
-      Ember.$('script[src*="googleadservices"]').remove();
+      $('script[src*="googleadservices"]').remove();
       delete window.google_trackConversion;
     }
   })

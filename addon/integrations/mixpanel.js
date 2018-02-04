@@ -1,20 +1,15 @@
-import Ember from 'ember';
+import $ from 'jquery';
+
 import Base from 'ember-cli-analytics/integrations/base';
 import canUseDOM from 'ember-cli-analytics/utils/can-use-dom';
 import without from 'ember-cli-analytics/utils/without';
 
-const {
-  assert,
-  copy,
-  get,
-  isPresent,
-  merge,
-  on
-} = Ember;
-
-const {
-  keys
-} = Object;
+import { assert } from '@ember/debug';
+import { get } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { copy } from '@ember/object/internals';
+import { merge } from '@ember/polyfills';
+import { isPresent } from '@ember/utils';
 
 export default Base.extend({
 
@@ -49,7 +44,7 @@ export default Base.extend({
     assert('You must pass an event name', event);
 
     if (canUseDOM) {
-      if (isPresent(keys(properties))) {
+      if (isPresent(Object.keys(properties))) {
         window.mixpanel.track(event, properties);
       } else {
         window.mixpanel.track(event);
@@ -73,7 +68,7 @@ export default Base.extend({
     assert('You must pass a value', value);
 
     if (canUseDOM) {
-      if (isPresent(keys(properties))) {
+      if (isPresent(Object.keys(properties))) {
         window.mixpanel.people.track_charge(value, properties);
       } else {
         window.mixpanel.people.track_charge(value);
@@ -102,7 +97,7 @@ export default Base.extend({
     assert('You must pass a distinct id', id);
 
     if (canUseDOM) {
-      if (isPresent(keys(properties))) {
+      if (isPresent(Object.keys(properties))) {
         window.mixpanel.identify(id, properties);
       } else {
         window.mixpanel.identify(id);
@@ -171,7 +166,7 @@ export default Base.extend({
    */
   removeTag: on('willDestroy', function() {
     if (canUseDOM) {
-      Ember.$('script[src*="mxpnl"]').remove();
+      $('script[src*="mxpnl"]').remove();
       delete window.mixpanel;
     }
   })

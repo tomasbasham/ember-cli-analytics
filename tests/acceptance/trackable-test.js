@@ -1,32 +1,29 @@
-import Ember from 'ember';
-import { module, test } from 'qunit';
-import startApp from 'dummy/tests/helpers/start-app';
 import Sinon from 'sinon';
 
-const {
-  get
-} = Ember;
+import { get } from '@ember/object';
+import { test } from 'qunit';
 
-let application, sandbox;
+import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 
-module('Acceptance | trackable', {
+let sandbox;
+
+moduleForAcceptance('Acceptance | trackable', {
   beforeEach: function() {
-    application = startApp();
     sandbox = Sinon.sandbox.create();
   },
 
   afterEach: function() {
-    Ember.run(application, 'destroy');
     sandbox.restore();
   }
 });
 
 test('#trackPage is called for every route transition', function(assert) {
-  const router = application.__container__.lookup('router:main');
+  const router = this.application.__container__.lookup('router:main');
   const analytics = get(router, 'analytics');
   const spy = sandbox.spy(analytics, 'trackPage');
 
   visit('/index');
+
   andThen(function() {
     assert.ok(spy.withArgs({ page: '/index', title: '/index'}).calledOnce);
   });

@@ -1,7 +1,3 @@
-const {
-  keys
-} = Object;
-
 /*
  * Return an object with each of the
  * listed keys removed.
@@ -15,7 +11,7 @@ const {
  *   A list of keys to remove from the original object.
  */
 export default function without(original, ...args) {
-  const originalKeys = keys(original);
+  const originalKeys = Object.keys(original);
   const newObject = {};
 
   originalKeys.forEach(function(key) {

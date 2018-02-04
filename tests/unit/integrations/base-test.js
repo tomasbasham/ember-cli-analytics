@@ -1,5 +1,5 @@
-import { moduleFor, test } from 'ember-qunit';
 import Sinon from 'sinon';
+import { moduleFor, test } from 'ember-qunit';
 
 let sandbox;
 

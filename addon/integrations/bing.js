@@ -1,13 +1,12 @@
-import Ember from 'ember';
+import $ from 'jquery';
+
 import Base from 'ember-cli-analytics/integrations/base';
 import canUseDOM from 'ember-cli-analytics/utils/can-use-dom';
 
-const {
-  assert,
-  copy,
-  get,
-  on
-} = Ember;
+import { assert } from '@ember/debug';
+import { get } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { copy } from '@ember/object/internals';
 
 export default Base.extend({
 
@@ -79,7 +78,7 @@ export default Base.extend({
    */
   removeTag: on('willDestroy', function() {
     if (canUseDOM) {
-      Ember.$('script[src*="bing"]').remove();
+      $('script[src*="bing"]').remove();
       delete window.uetq;
     }
   })

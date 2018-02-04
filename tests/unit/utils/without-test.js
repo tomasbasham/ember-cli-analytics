@@ -1,4 +1,4 @@
-import without from '../../../utils/without';
+import without from 'dummy/utils/without';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | without');

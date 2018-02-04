@@ -1,24 +1,16 @@
-import Ember from 'ember';
+import $ from 'jquery';
+
 import Base from 'ember-cli-analytics/integrations/base';
 import canUseDOM from 'ember-cli-analytics/utils/can-use-dom';
 import without from 'ember-cli-analytics/utils/without';
 
-const {
-  assert,
-  copy,
-  get,
-  isPresent,
-  merge,
-  on
-} = Ember;
-
-const {
-  capitalize
-} = Ember.String;
-
-const {
-  keys
-} = Object;
+import { assert } from '@ember/debug';
+import { get } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { copy } from '@ember/object/internals';
+import { merge } from '@ember/polyfills';
+import { capitalize } from '@ember/string';
+import { isPresent } from '@ember/utils';
 
 export default Base.extend({
 
@@ -124,7 +116,7 @@ export default Base.extend({
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
       /* eslint-enable */
 
-      if (isPresent(keys(properties))) {
+      if (isPresent(Object.keys(properties))) {
         window.ga('create', id, properties);
       } else {
         window.ga('create', id, 'auto');
@@ -160,7 +152,7 @@ export default Base.extend({
    */
   removeTag: on('willDestroy', function() {
     if (canUseDOM) {
-      Ember.$('script[src*="google-analytics"]').remove();
+      $('script[src*="google-analytics"]').remove();
       delete window.ga;
     }
   })
