@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-analytics",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "An ember-cli addon to interface with analytics services and external integrations",
   "keywords": [
     "ember-addon"
@@ -19,7 +19,7 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "ember-cli-adapter-pattern": "^1.1.0",
+    "ember-cli-adapter-pattern": "^1.2.0",
     "ember-cli-babel": "^6.6.0"
   },
   "devDependencies": {
