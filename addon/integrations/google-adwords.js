@@ -58,7 +58,7 @@ export default Base.extend({
    * @on init
    */
   insertTag: on('init', function() {
-    if (canUseDOM) {
+    if (canUseDOM && !window['google_trackConversion']) {
       /* eslint-disable */
       (function(i,s,o,g,r,a,m){
         i[r]=i[r]||function(){(i['r'].q=i['r'].q||[]).push(arguments)}

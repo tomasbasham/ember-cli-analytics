@@ -56,7 +56,9 @@ export default Base.extend({
 
     assert('You must pass a valid `id` to the Bing adapter', id);
 
-    if (canUseDOM) {
+    if (!canUseDOM) return
+
+    if (!window.uetq) {
       /* eslint-disable */
       (function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){
         var o={ti:id};o.q=w[u],w[u]=new UET(o),w[u].push('pageLoad')},

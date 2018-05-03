@@ -75,7 +75,9 @@ export default Base.extend({
 
     assert('You must pass a valid `id` to the Bing adapter', id);
 
-    if (canUseDOM) {
+    if (!canUseDOM) return
+
+    if (!window.fbq) {
       /* eslint-disable */
       (function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
         n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -84,9 +86,9 @@ export default Base.extend({
         s.parentNode.insertBefore(t,s)
       })(window,document,'script','//connect.facebook.net/en_US/fbevents.js');
       /* eslint-enable */
-
-      window.fbq('init', id);
     }
+
+    window.fbq('init', id);
   }),
 
   /*
