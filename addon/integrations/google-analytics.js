@@ -34,7 +34,7 @@ export default Base.extend({
 
   /*
    * Send an arbitrary event to the
-   * anlytics engine.
+   * analytics engine.
    *
    * @method trackEvent
    *
@@ -108,36 +108,38 @@ export default Base.extend({
 
     assert('You must pass a valid `id` to the GoogleAnaltics adapter', id);
 
-    if (canUseDOM) {
+    if (!canUseDOM) return
+
+    if (!window.ga) {
       /* eslint-disable */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
       /* eslint-enable */
+    }
 
-      if (isPresent(Object.keys(properties))) {
-        window.ga('create', id, properties);
-      } else {
-        window.ga('create', id, 'auto');
-      }
+    if (isPresent(Object.keys(properties))) {
+      window.ga('create', id, properties);
+    } else {
+      window.ga('create', id, 'auto');
+    }
 
-      if (remarketing) {
-        window.ga('require', 'displayfeatures');
-      }
+    if (remarketing) {
+      window.ga('require', 'displayfeatures');
+    }
 
-      if (ecommerce) {
-        window.ga('require', 'ecommerce');
-      }
+    if (ecommerce) {
+      window.ga('require', 'ecommerce');
+    }
 
-      if (enhancedEcommerce) {
-        window.ga('require', 'ecommerce');
-      }
+    if (enhancedEcommerce) {
+      window.ga('require', 'ecommerce');
+    }
 
-      if (set) {
-        for (const attr of Object.keys(set)) {
-          window.ga('set', attr, set[attr]);
-        }
+    if (set) {
+      for (const attr of Object.keys(set)) {
+        window.ga('set', attr, set[attr]);
       }
     }
   }),

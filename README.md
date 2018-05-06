@@ -23,6 +23,29 @@ From within your Ember CLI project directory run:
 ember install ember-cli-analytics
 ```
 
+### Options for higher-security implementations
+
+Some higher-security sites want to prohibit all script-based access to
+third-party sites. If this is the case for your site, you might prefer to
+download the analytics scripts to your `vendor` location first and then
+incorporate them into your ember application via the build process. For example,
+for google analytics, you would do the following:
+
+```sh
+  curl https://www.google-analytics.com/analytics.js > vendor/google-analytics.js
+```
+
+Then, to load the script as part of the build process, add a command to your
+`ember-cli-build.js` file. For the Google Analytics example, you would do the
+following:
+
+```js
+  app.import('vendor/google-analytics.js')
+```
+
+If you have loaded the scripts into your application via the build process,
+`ember-cli-analytics` will _not_ attempt to download them when necessary.
+
 ## Usage
 
 This addon implements a service to interface with several analytics integration

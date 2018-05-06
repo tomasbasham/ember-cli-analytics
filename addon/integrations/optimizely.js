@@ -71,7 +71,7 @@ export default Base.extend({
 
     assert('You must pass a valid `id` to the Optimizely adapter', id);
 
-    if (canUseDOM) {
+    if (canUseDOM && !window.optimizely) {
       /* eslint-disable */
       (function(i,s,o,g,r,a,m){
         i['OptimizrlyObject']=r;i[r]=i[r]||[];a=s.createElement(o),
