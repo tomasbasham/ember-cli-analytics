@@ -24,14 +24,16 @@ export default Mixin.create({
    */
   trackPageView: on('didTransition', function() {
     const analytics = get(this, 'analytics');
+    const owner = getOwner(this)
 
     assert('Could not find the analytics service.', analytics);
+
     let limitRouteInformation = false
-    const owner = getOwner(this)
     if (owner) {
       const config = owner.resolveRegistration('config:environment')
       limitRouteInformation = get(config, 'analytics.options.limitRouteInformation')
     }
+
     const routeData = limitRouteInformation ? get(this, 'currentRouteName') : get(this, 'url')
     analytics.trackPage({ page: routeData, title: routeData });
   })
