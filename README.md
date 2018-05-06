@@ -129,6 +129,23 @@ the name of each adapter, in pascal case, this addon also requires a
 configuration object typically defining the `id` or `token` required to
 authenticate with the external service.
 
+#### Options
+
+In addition under the `analytics` configuration heading, it is also possible to set an option `limitRouteInformation`. Some higher-security sites may have sensitive information embedded in their routes such as email addresses or invitation codes which should not be leaked to any third-parties. If you set `limitRouteInformation` to `true`, then `ember-cli-analytics` will only send the current route name to an analytics service rather than the entire URL.
+
+For example:
+
+```javascript
+// config/environment.js
+module.exports = function(environment) {
+  let ENV = {
+    analytics: {
+      options: {
+        limitRouteInformation: true,
+      },
+    }
+```
+
 ### Injection
 
 This addon makes no assumptions about what ember objects you want to make the
