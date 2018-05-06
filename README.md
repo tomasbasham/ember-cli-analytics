@@ -23,29 +23,6 @@ From within your Ember CLI project directory run:
 ember install ember-cli-analytics
 ```
 
-### Options for higher-security implementations
-
-Some higher-security sites want to prohibit all script-based access to
-third-party sites. If this is the case for your site, you might prefer to
-download the analytics scripts to your `vendor` location first and then
-incorporate them into your ember application via the build process. For example,
-for google analytics, you would do the following:
-
-```sh
-  curl https://www.google-analytics.com/analytics.js > vendor/google-analytics.js
-```
-
-Then, to load the script as part of the build process, add a command to your
-`ember-cli-build.js` file. For the Google Analytics example, you would do the
-following:
-
-```js
-  app.import('vendor/google-analytics.js')
-```
-
-If you have loaded the scripts into your application via the build process,
-`ember-cli-analytics` will _not_ attempt to download them when necessary.
-
 ## Usage
 
 This addon implements a service to interface with several analytics integration
@@ -119,6 +96,54 @@ module.exports = function(environment) {
 
 This configures your application to use all 6 adapters bundled with this addon.
 
+#### Options for higher-security implementations
+
+Some higher-security sites may want to prohibit all script-based access to
+third-party sites. If this is the case for your site, you might prefer to
+download the analytics scripts to the `vendor` location first and then
+incorporate them into your ember application via the build process. For
+example, for google analytics, you would do the following:
+
+```sh
+curl https://www.google-analytics.com/analytics.js > vendor/google-analytics.js
+```
+
+The script can now be loaded as part of the build process by adding a command
+to your `ember-cli-build.js` file. For the Google Analytics example, you would
+do the following:
+
+```JavaScript
+app.import('vendor/google-analytics.js')
+```
+
+If you have loaded the scripts into your application via the build process,
+`ember-cli-analytics` will _not_ attempt to download them when necessary.
+
+Additionally under the `analytics` configuration key, it is also possible to
+set an option `limitRouteInformation`. Some higher-security sites may have
+sensitive information embedded in their routes such as email addresses or
+invitation codes which should not be leaked to any third-parties. If you set
+`limitRouteInformation` to `true`, then `ember-cli-analytics` will only send
+the current route name to an analytics service rather than the entire URL.
+
+##### limitRouteInformation Example
+
+```JavaScript
+// config/environment.js
+module.exports = function(environment) {
+  let ENV = {
+    analytics: {
+      options: {
+        limitRouteInformation: true,
+      },
+      integrations: [
+        ...
+      ]
+    }
+  };
+};
+```
+
 #### Integrations
 
 The integrations array takes a series of objects defining the configuration of
@@ -128,23 +153,6 @@ where each object may take an additional series of key/value pairs. Alongside
 the name of each adapter, in pascal case, this addon also requires a
 configuration object typically defining the `id` or `token` required to
 authenticate with the external service.
-
-#### Options
-
-In addition under the `analytics` configuration heading, it is also possible to set an option `limitRouteInformation`. Some higher-security sites may have sensitive information embedded in their routes such as email addresses or invitation codes which should not be leaked to any third-parties. If you set `limitRouteInformation` to `true`, then `ember-cli-analytics` will only send the current route name to an analytics service rather than the entire URL.
-
-For example:
-
-```javascript
-// config/environment.js
-module.exports = function(environment) {
-  let ENV = {
-    analytics: {
-      options: {
-        limitRouteInformation: true,
-      },
-    }
-```
 
 ### Injection
 
