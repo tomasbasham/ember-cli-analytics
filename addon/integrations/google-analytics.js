@@ -108,7 +108,9 @@ export default Base.extend({
 
     assert('You must pass a valid `id` to the GoogleAnaltics adapter', id);
 
-    if (!canUseDOM) return
+    if (!canUseDOM) {
+      return;
+    }
 
     if (!window.ga) {
       /* eslint-disable */

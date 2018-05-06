@@ -75,7 +75,9 @@ export default Base.extend({
 
     assert('You must pass a valid `id` to the Bing adapter', id);
 
-    if (!canUseDOM) return
+    if (!canUseDOM) {
+      return;
+    }
 
     if (!window.fbq) {
       /* eslint-disable */
