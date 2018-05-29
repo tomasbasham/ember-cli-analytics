@@ -143,6 +143,11 @@ export default Base.extend({
       for (const attr of Object.keys(set)) {
         window.ga('set', attr, set[attr]);
       }
+      if (set) {
+        for ( const attr of Object.keys(set) ) {
+          window.ga('set', attr, set[attr]);
+        }
+      }
     }
   }),
 
