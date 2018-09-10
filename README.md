@@ -154,6 +154,7 @@ the name of each adapter, in pascal case, this addon also requires a
 configuration object typically defining the `id` or `token` required to
 authenticate with the external service.
 
+
 ### Injection
 
 This addon makes no assumptions about what ember objects you want to make the
@@ -283,6 +284,42 @@ Router.map(function() {
 });
 
 export default Router;
+```
+
+### Writing custom integrations
+
+For writing your own analytics integration (e.g. for calling a tracking pixel), extend from the base integration
+and implement the functions you want to supply.
+
+```Javascript
+import Base from 'ember-cli-analytics/integrations/base';
+
+export default Base.extend({
+
+  trackConversion(options = {}) {
+    ...
+  },
+
+  trackEvent(options = {}) {
+    ...
+  }
+});
+```
+
+Then create an initializer to register your integration to the application container, under the `ember-cli-analytics@integration` factory key.
+
+```Javascript
+import CustomIntegration from '../analytics-integrations/custom-integration';
+export function initialize(application) {
+
+  application.register('ember-cli-analytics@integration:custom-integration', CustomIntegration);
+}
+
+export default {
+  name: 'analytics-integrations',
+  initialize
+};
+
 ```
 
 ## Development
