@@ -3,11 +3,11 @@ import $ from 'jquery';
 import Base from 'ember-cli-analytics/integrations/base';
 import canUseDOM from 'ember-cli-analytics/utils/can-use-dom';
 import without from 'ember-cli-analytics/utils/without';
+import { copy } from 'ember-copy';
 
 import { assert } from '@ember/debug';
 import { get } from '@ember/object';
 import { on } from '@ember/object/evented';
-import { copy } from 'ember-copy';
 import { merge } from '@ember/polyfills';
 import { capitalize } from '@ember/string';
 import { isPresent } from '@ember/utils';
