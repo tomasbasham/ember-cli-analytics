@@ -6,7 +6,7 @@ import canUseDOM from 'ember-cli-analytics/utils/can-use-dom';
 import { assert } from '@ember/debug';
 import { get } from '@ember/object';
 import { on } from '@ember/object/evented';
-import { copy } from '@ember/object/internals';
+import { copy } from 'ember-copy';
 
 export default Base.extend({
 

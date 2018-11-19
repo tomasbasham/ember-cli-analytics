@@ -7,7 +7,7 @@ import without from 'ember-cli-analytics/utils/without';
 import { assert } from '@ember/debug';
 import { get } from '@ember/object';
 import { on } from '@ember/object/evented';
-import { copy } from '@ember/object/internals';
+import { copy } from 'ember-copy';
 import { isPresent } from '@ember/utils';
 
 export default Base.extend({
