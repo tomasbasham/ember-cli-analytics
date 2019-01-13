@@ -16,6 +16,11 @@ This addon is built upon the
 [ember-cli-adapter-pattern](https://github.com/tomasbasham/ember-cli-adapter-pattern)
 allowing you to easily create your own analytics integration adapters.
 
+## Compatibility
+
+* Ember.js v2.18 or above
+* Ember CLI v2.13 or above
+
 ## Installation
 
 From within your Ember CLI project directory run:
@@ -285,29 +290,6 @@ Router.map(function() {
 export default Router;
 ```
 
-## Development
+## License
 
-### Installation
-
-* `git clone <repository-url>` this repository
-* `cd ember-cli-analytics`
-* `npm install`
-
-### Running
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-### Running Tests
-
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember
-  versions)
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build`
-
-For more information on using ember-cli, visit
-[https://ember-cli.com/](https://ember-cli.com/).
+This project is licensed under the [MIT License](LICENSE.md).
