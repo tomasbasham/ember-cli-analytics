@@ -1,4 +1,4 @@
-# ember-cli-analytics [![Build Status](https://travis-ci.org/tomasbasham/ember-cli-analytics.svg?branch=master)](https://travis-ci.org/tomasbasham/ember-cli-analytics)
+# ember-cli-analytics [![Build Status](https://travis-ci.com/tomasbasham/ember-cli-analytics.svg?branch=master)](https://travis-ci.com/tomasbasham/ember-cli-analytics)
 
 An [Ember CLI](https://ember-cli.com/) addon to interface with analytics
 services and external integrations.
