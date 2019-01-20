@@ -1,79 +1,82 @@
 import Sinon from 'sinon';
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
 let sandbox, config;
 
-moduleFor('integration:google-analytics', 'Unit | Integration | google analytics', {
-  beforeEach() {
+module('Unit | Integration | google analytics', function(hooks) {
+  setupTest(hooks);
+
+  hooks.beforeEach(function() {
     sandbox = Sinon.sandbox.create();
     config = {
       id: 'UA-XXXXXXXX-Y'
     };
-  },
+  });
 
-  afterEach() {
+  hooks.afterEach(function() {
     sandbox.restore();
-  }
-});
-
-test('it can be configured with an id', function(assert) {
-  let integration = this.subject({ config });
-  assert.ok(integration);
-});
-
-test('#trackPage calls ga with the correct arguments', function(assert) {
-  let integration = this.subject({ config });
-
-  const stub = sandbox.stub(window, 'ga').callsFake(function() {
-    return true;
   });
 
-  integration.trackPage({ url: '/', title: '/' });
-  assert.ok(stub.calledWith('send', { hitType: 'pageview', url: '/', title: '/' }));
-});
-
-test('#trackEvent calls ga with the correct arguments', function(assert) {
-  let integration = this.subject({ config });
-
-  const stub = sandbox.stub(window, 'ga').callsFake(function() {
-    return true;
+  test('it can be configured with an id', function(assert) {
+    let integration = this.owner.factoryFor('integration:google-analytics').create({ config });
+    assert.ok(integration);
   });
 
-  integration.trackEvent({ category: 'Starships', action: 'Warp', label: 'Enterprise' });
+  test('#trackPage calls ga with the correct arguments', function(assert) {
+    let integration = this.owner.factoryFor('integration:google-analytics').create({ config });
 
-  assert.ok(stub.calledWith('send', {
-    hitType: 'event',
-    eventCategory: 'Starships',
-    eventAction: 'Warp',
-    eventLabel: 'Enterprise'
-  }));
-});
+    const stub = sandbox.stub(window, 'ga').callsFake(function() {
+      return true;
+    });
 
-test('#trackEvent handles metrics and dimensions correctly', function(assert) {
-  let integration = this.subject({ config });
-
-  const stub = sandbox.stub(window, 'ga').callsFake(function() {
-    return true;
+    integration.trackPage({ url: '/', title: '/' });
+    assert.ok(stub.calledWith('send', { hitType: 'pageview', url: '/', title: '/' }));
   });
 
-  integration.trackEvent({ category: 'Starships', action: 'Warp', dimension1: 'Enterprise', metric1: 'D' });
+  test('#trackEvent calls ga with the correct arguments', function(assert) {
+    let integration = this.owner.factoryFor('integration:google-analytics').create({ config });
 
-  assert.ok(stub.calledWith('send', {
-    hitType: 'event',
-    eventCategory: 'Starships',
-    eventAction: 'Warp',
-    dimension1: 'Enterprise',
-    metric1: 'D'
-  }));
-});
+    const stub = sandbox.stub(window, 'ga').callsFake(function() {
+      return true;
+    });
 
-test('#identify calls ga with the correct arguments', function(assert) {
-  let integration = this.subject({ config });
+    integration.trackEvent({ category: 'Starships', action: 'Warp', label: 'Enterprise' });
 
-  const stub = sandbox.stub(window, 'ga').callsFake(function() {
-    return true;
+    assert.ok(stub.calledWith('send', {
+      hitType: 'event',
+      eventCategory: 'Starships',
+      eventAction: 'Warp',
+      eventLabel: 'Enterprise'
+    }));
   });
 
-  integration.identify({ id: '001' });
-  assert.ok(stub.calledWith('set', 'userId', '001'));
+  test('#trackEvent handles metrics and dimensions correctly', function(assert) {
+    let integration = this.owner.factoryFor('integration:google-analytics').create({ config });
+
+    const stub = sandbox.stub(window, 'ga').callsFake(function() {
+      return true;
+    });
+
+    integration.trackEvent({ category: 'Starships', action: 'Warp', dimension1: 'Enterprise', metric1: 'D' });
+
+    assert.ok(stub.calledWith('send', {
+      hitType: 'event',
+      eventCategory: 'Starships',
+      eventAction: 'Warp',
+      dimension1: 'Enterprise',
+      metric1: 'D'
+    }));
+  });
+
+  test('#identify calls ga with the correct arguments', function(assert) {
+    let integration = this.owner.factoryFor('integration:google-analytics').create({ config });
+
+    const stub = sandbox.stub(window, 'ga').callsFake(function() {
+      return true;
+    });
+
+    integration.identify({ id: '001' });
+    assert.ok(stub.calledWith('set', 'userId', '001'));
+  });
 });

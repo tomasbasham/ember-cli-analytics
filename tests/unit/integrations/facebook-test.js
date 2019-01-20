@@ -1,44 +1,47 @@
 import Sinon from 'sinon';
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
 let sandbox, config;
 
-moduleFor('integration:facebook', 'Unit | Integration | facebook', {
-  beforeEach() {
+module('Unit | Integration | facebook', function(hooks) {
+  setupTest(hooks);
+
+  hooks.beforeEach(function() {
     sandbox = Sinon.sandbox.create();
     config = {
       id: 'XXXXXXXXXXXXXXXX'
     };
-  },
+  });
 
-  afterEach() {
+  hooks.afterEach(function() {
     sandbox.restore();
-  }
-});
-
-test('it can be configured with an id', function(assert) {
-  let integration = this.subject({ config });
-  assert.ok(integration);
-});
-
-test('#trackEvent calls fbq with the correct arguments', function(assert) {
-  let integration = this.subject({ config });
-
-  const stub = sandbox.stub(window, 'fbq').callsFake(function() {
-    return true;
   });
 
-  integration.trackEvent({ event: 'The Battle of Sector 001' });
-  assert.ok(stub.calledWith('track', 'The Battle of Sector 001'));
-});
-
-test('#trackConversion calls fbq with the correct arguments', function(assert) {
-  let integration = this.subject({ config });
-
-  const stub = sandbox.stub(window, 'fbq').callsFake(function() {
-    return true;
+  test('it can be configured with an id', function(assert) {
+    let integration = this.owner.factoryFor('integration:facebook').create({ config });
+    assert.ok(integration);
   });
 
-  integration.trackConversion({ event: 'The Battle of Sector 001' });
-  assert.ok(stub.calledWith('track', 'The Battle of Sector 001'));
+  test('#trackEvent calls fbq with the correct arguments', function(assert) {
+    let integration = this.owner.factoryFor('integration:facebook').create({ config });
+
+    const stub = sandbox.stub(window, 'fbq').callsFake(function() {
+      return true;
+    });
+
+    integration.trackEvent({ event: 'The Battle of Sector 001' });
+    assert.ok(stub.calledWith('track', 'The Battle of Sector 001'));
+  });
+
+  test('#trackConversion calls fbq with the correct arguments', function(assert) {
+    let integration = this.owner.factoryFor('integration:facebook').create({ config });
+
+    const stub = sandbox.stub(window, 'fbq').callsFake(function() {
+      return true;
+    });
+
+    integration.trackConversion({ event: 'The Battle of Sector 001' });
+    assert.ok(stub.calledWith('track', 'The Battle of Sector 001'));
+  });
 });
