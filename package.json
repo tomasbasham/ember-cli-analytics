@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-analytics",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "An ember-cli addon to interface with analytics services and external integrations",
   "keywords": [
     "ember-addon"
