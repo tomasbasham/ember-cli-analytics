@@ -7,8 +7,7 @@ import without from 'ember-cli-analytics/utils/without';
 import { assert } from '@ember/debug';
 import { get } from '@ember/object';
 import { on } from '@ember/object/evented';
-import { copy } from '@ember/object/internals';
-import { merge } from '@ember/polyfills';
+import { assign } from '@ember/polyfills';
 import { isPresent } from '@ember/utils';
 
 export default Base.extend({
@@ -24,7 +23,7 @@ export default Base.extend({
    */
   trackPage(options = {}) {
     const sendEvent = { event: 'pageView' };
-    const event = merge(sendEvent, options);
+    const event = assign({}, sendEvent, options);
     this.trackEvent(event);
   },
 
@@ -141,8 +140,8 @@ export default Base.extend({
    * @on init
    */
   insertTag: on('init', function() {
-    const config = copy(get(this, 'config'));
-    const { token } = config;
+    const config = get(this, 'config');
+    const { token } = assign({}, config);
 
     assert('You must pass a valid `token` to the Mixpanel adapter', token);
 

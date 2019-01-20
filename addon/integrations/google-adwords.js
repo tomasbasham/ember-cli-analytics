@@ -7,8 +7,7 @@ import without from 'ember-cli-analytics/utils/without';
 import { assert } from '@ember/debug';
 import { get } from '@ember/object';
 import { on } from '@ember/object/evented';
-import { copy } from '@ember/object/internals';
-import { merge } from '@ember/polyfills';
+import { assign } from '@ember/polyfills';
 import { isPresent } from '@ember/utils';
 
 export default Base.extend({
@@ -23,15 +22,15 @@ export default Base.extend({
    *   Options to send the analytics engine.
    */
   trackConversion(options = {}) {
-    const config = copy(get(this, 'config'));
-    const { id, label } = config;
+    const config = get(this, 'config');
+    const { id, label } = assign({}, config);
     const { value } = options;
     const properties = without(options, 'value');
 
     assert('You must pass a valid `id` to the GoogleAdwords adapter', id);
     assert('You must pass a valid `label` to the GoogleAdwords adapter', label);
 
-    const googleAdwordsEvent = merge({
+    const googleAdwordsEvent = assign({}, {
       'google_conversion_id': id,
       'google_conversion_language': 'en',
       'google_conversion_format': '3',

@@ -6,7 +6,7 @@ import canUseDOM from 'ember-cli-analytics/utils/can-use-dom';
 import { assert } from '@ember/debug';
 import { get } from '@ember/object';
 import { on } from '@ember/object/evented';
-import { copy } from '@ember/object/internals';
+import { assign } from '@ember/polyfills';
 
 export default Base.extend({
 
@@ -51,8 +51,8 @@ export default Base.extend({
    * @on init
    */
   insertTag: on('init', function() {
-    const config = copy(get(this, 'config'));
-    const { id } = config;
+    const config = get(this, 'config');
+    const { id } = assign({}, config);
 
     assert('You must pass a valid `id` to the Bing adapter', id);
 

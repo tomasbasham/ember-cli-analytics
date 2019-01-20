@@ -7,8 +7,7 @@ import without from 'ember-cli-analytics/utils/without';
 import { assert } from '@ember/debug';
 import { get } from '@ember/object';
 import { on } from '@ember/object/evented';
-import { copy } from '@ember/object/internals';
-import { merge } from '@ember/polyfills';
+import { assign } from '@ember/polyfills';
 import { capitalize } from '@ember/string';
 import { isPresent } from '@ember/utils';
 
@@ -25,7 +24,7 @@ export default Base.extend({
    */
   trackPage(options = {}) {
     const sendEvent = { hitType: 'pageview' };
-    const event = merge(sendEvent, options);
+    const event = assign({}, sendEvent, options);
 
     if (canUseDOM) {
       window.ga('send', event);
@@ -62,7 +61,7 @@ export default Base.extend({
       gaEvent[key] = value;
     }
 
-    const event = merge(sendEvent, gaEvent);
+    const event = assign({}, sendEvent, gaEvent);
 
     if(canUseDOM) {
       window.ga('send', event);
@@ -102,8 +101,8 @@ export default Base.extend({
    * @on init
    */
   insertTag: on('init', function() {
-    const config = copy(get(this, 'config'));
-    const { id, remarketing, ecommerce, enhancedEcommerce, set } = config;
+    const config = get(this, 'config');
+    const { id, remarketing, ecommerce, enhancedEcommerce, set } = assign({}, config);
     const properties = without(config, 'id', 'remarketing', 'ecommerce', 'enhancedEcommerce', 'set');
 
     assert('You must pass a valid `id` to the GoogleAnaltics adapter', id);
